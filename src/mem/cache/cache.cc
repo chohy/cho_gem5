@@ -56,6 +56,7 @@
 #include "base/misc.hh"
 #include "base/types.hh"
 #include "debug/Cache.hh"
+#include "debug/CacheAccess.hh"
 #include "debug/CachePort.hh"
 #include "debug/CacheTags.hh"
 #include "debug/CacheVerbose.hh"
@@ -679,6 +680,9 @@ Cache::recvTimingReq(PacketPtr pkt)
         // proceed anything happening below
         doWritebacks(writebacks, forward_time);
     }
+
+    DPRINTF(CacheAccess, "Addr: %s , %s\n",
+            pkt->getAddr(), satisfied?"Hit":"Miss");
 
     // Here we charge the headerDelay that takes into account the latencies
     // of the bus, if the packet comes from it.
