@@ -250,6 +250,11 @@ class BaseTags : public ClockedObject
     virtual int extractSet(Addr addr) const = 0;
 
     virtual void forEachBlk(CacheBlkVisitor &visitor) = 0;
+
+    /** For tag sharing set associative */
+    virtual bool isShared(Addr addr) = 0;
+    //virtual void invalidateSet(Addr addr) = 0;
+    virtual Addr extractSharedTag(Addr addr) = 0;
 };
 
 class BaseTagsCallback : public Callback
